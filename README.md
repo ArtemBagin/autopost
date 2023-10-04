@@ -1,6 +1,6 @@
 # autopost
 
-pip install requirements
+pip install -r requirements.txt
 
 cd app
 
