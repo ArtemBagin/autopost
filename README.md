@@ -1,11 +1,11 @@
-# autopost
+# Autopost service
 
-pip install -r requirements.txt
+Usage
 
-cd app
+```sh
+docker-compose up
+```
+This will start the database API, redis, celery with hot reload.
 
-celery -A autopost.autopost:celery worker --loglevel=INFO --pool=solo
-
-celery -A autopost.autopost:celery beat -S redbeat.RedBeatScheduler
-
-uvicorn main:app --reload
+# Docs
+The docs at http://localhost:9999/docs
