@@ -1,0 +1,69 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:latest
+    container_name: db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - pgconf:/etc/postgresql
+      - pglog:/var/log/postgresql
+    command: -p 5432
+    expose:
+      - 5432
+    env_file:
+      - .env-non-dev
+    environment:
+      POSTGRES_PASSWORD: "S1DjDkl2daW"
+
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    command: --port 6379
+    expose:
+      - 6379
+
+  app:
+    build:
+      context: .
+    container_name: app
+    env_file:
+      - .env-non-dev
+    ports:
+      - 9999:8000
+    depends_on:
+      - db
+      - redis
+    command: ['/app/docker/app.sh']
+
+  celery-worker:
+    build:
+      context: .
+    container_name: celery_worker
+    ports: []
+    env_file:
+      - .env-non-dev
+    command: ['/app/docker/celery.sh', 'worker']
+    depends_on:
+      - redis
+
+  celery-beat:
+    build:
+      context: .
+    container_name: celery_beat
+    ports: []
+    env_file:
+      - .env-non-dev
+    command: [ '/app/docker/celery.sh', 'beat']
+    depends_on:
+      - redis
+      - celery-worker
+
+volumes:
+  pgdata:
+    driver: local
+  pgconf:
+    driver: local
+  pglog:
+    driver: local

@@ -6,10 +6,13 @@ from typing import Type
 import requests
 
 from schemas import TaskBase
+from config import settings
 
-celery = Celery('tasks', broker='redis://localhost:6379')
-redbeat_redis_url = "redis://localhost:6379"
+redbeat_redis_url = f'redis://{settings.redis_hostname}:{settings.redis_port}'
+celery = Celery('tasks', broker=redbeat_redis_url)
 redbeat_lock_key = None
+beat_max_loop_interval=5
+redbeat_lock_timeout=10
 celery.autodiscover_tasks(force=True)
 
 

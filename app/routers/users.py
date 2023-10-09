@@ -13,7 +13,7 @@ router = APIRouter(
 )
 
 
-@router.post('/login', status_code=status.HTTP_201_CREATED)
+@router.post('/reg', status_code=status.HTTP_201_CREATED)
 async def create_user(data: UserCreate, db: AsyncSession = Depends(get_db)):
     user = await db.execute(select(User).where(User.email == data.email))
     user = user.first()
