@@ -1,4 +1,4 @@
-# Autopost service
+# Autopost API
 
 Usage
 
