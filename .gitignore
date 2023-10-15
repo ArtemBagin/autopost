@@ -20,8 +20,9 @@ site_build
 venv
 docs.zip
 archive.zip
-alembic.ini
 celerybeat-schedule.bak
 celerybeat-schedule.dat
 celerybeat-schedule.dir
 .env
+/.env-non-dev
+/src/postgres-data/
