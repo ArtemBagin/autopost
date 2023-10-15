@@ -3,9 +3,9 @@
 Usage
 
 ```sh
-docker-compose up
+docker compose up
 ```
-This will start the database API, redis, celery with hot reload.
+This will start the database API, redis, celery.
 
 # Docs
 The docs at http://localhost:9999/docs
