@@ -15,7 +15,7 @@ async def add_vk_token(
         user: User,
         db: AsyncSession
 ):
-    await UserRepository(db).edit_one(id=user.id, data={'vk_t oken': token.token})
+    await UserRepository(db).edit_one(id=user.id, data={'vk_token': token.token})
     return {'status': 'token successfully changed'}
 
 
